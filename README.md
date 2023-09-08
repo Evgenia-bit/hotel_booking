@@ -1,16 +1,9 @@
-# hotel_booking
+# Приложение для бронирования отеля
 
-Hotel Booking App.
+## Демонстрация работы
 
-## Getting Started
 
-This project is a starting point for a Flutter application.
+https://github.com/Evgenia-bit/hotel_booking/assets/63193897/3a883d6f-7014-4b9f-bdc0-75b18f643b78
 
-A few resources to get you started if this is your first Flutter project:
 
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
 
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
