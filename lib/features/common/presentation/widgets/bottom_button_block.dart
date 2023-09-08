@@ -4,8 +4,13 @@ import 'package:hotel_booking/features/common/presentation/widgets/blue_button.d
 
 class BottomButtonBlock extends StatelessWidget {
   final String text;
+  final VoidCallback onPressed;
 
-  const BottomButtonBlock({super.key, required this.text});
+  const BottomButtonBlock({
+    super.key,
+    required this.text,
+    required this.onPressed,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -15,11 +20,11 @@ class BottomButtonBlock extends StatelessWidget {
         color: AppColors.white,
         border: Border(
           top: BorderSide(
-            color: AppColors.lighterGrey1,
+            color: AppColors.lighterGrey,
           ),
         ),
       ),
-      child: BlueButton(text: text),
+      child: BlueButton(text: text, onPressed: onPressed),
     );
   }
 }

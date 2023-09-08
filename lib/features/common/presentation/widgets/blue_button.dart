@@ -3,12 +3,12 @@ import 'package:hotel_booking/core/styles/colors.dart';
 
 class BlueButton extends StatelessWidget {
   final String text;
-  final VoidCallback? onPressed;
+  final VoidCallback onPressed;
 
   const BlueButton({
     super.key,
     required this.text,
-     this.onPressed,
+   required  this.onPressed,
   });
 
   @override
@@ -24,7 +24,7 @@ class BlueButton extends StatelessWidget {
         ),
         child: Text(
           text,
-          style: textTheme.labelMedium?.copyWith(
+          style: textTheme.displayMedium?.copyWith(
             color: AppColors.white,
           ),
         ),

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:hotel_booking/core/styles/colors.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 
 class Rating extends StatelessWidget {
   final int rating;
@@ -25,14 +26,14 @@ class Rating extends StatelessWidget {
       child: Row(
         mainAxisSize: MainAxisSize.min,
         children: [
-          const Icon(
-            Icons.star,
-            color: AppColors.orange,
-            size: 15,
+          SvgPicture.asset(
+            'assets/icons/ic_star.svg',
+            height: 15,
           ),
+          const SizedBox(width: 2),
           Text(
             '$rating $ratingName',
-            style: textTheme.labelMedium?.copyWith(color: AppColors.orange),
+            style: textTheme.displayMedium?.copyWith(color: AppColors.orange),
           ),
         ],
       ),

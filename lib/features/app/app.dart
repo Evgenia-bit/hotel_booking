@@ -8,7 +8,7 @@ class App extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Weather',
+      title: 'Hotel booking',
       theme: createTheme(),
       routes: MainNavigation.routes,
     );

@@ -1,6 +1,6 @@
-import 'package:bloc/bloc.dart';
-import 'package:hotel_booking/features/hotel/data/models/hotel_model.dart';
-import 'package:hotel_booking/features/hotel/domain/hotel_repository.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:hotel_booking/features/hotel/domain/entity/hotel.dart';
+import 'package:hotel_booking/features/hotel/domain/repository/hotel_repository.dart';
 
 part 'hotel_state.dart';
 

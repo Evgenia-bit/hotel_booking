@@ -1,7 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 import 'package:hotel_booking/core/styles/colors.dart';
-import 'package:hotel_booking/features/hotel/presentation/bloc/hotel_cubit.dart';
+import 'package:hotel_booking/features/common/presentation/widgets/block_container.dart';
+import 'package:hotel_booking/features/common/presentation/widgets/peculiarity_wrap.dart';
+import 'package:hotel_booking/features/hotel/presentation/cubit/hotel_cubit.dart';
 
 class DetailsBlock extends StatelessWidget {
   const DetailsBlock({super.key});
@@ -9,79 +12,29 @@ class DetailsBlock extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final textTheme = Theme.of(context).textTheme;
-    final bloc = context.watch<HotelCubit>();
-    final aboutTheHotel = bloc.state.hotel?.about_the_hotel;
+    final hotel = context.watch<HotelCubit>().state.hotel;
 
-    if (aboutTheHotel == null) {
+    if (hotel == null) {
       return const SizedBox.shrink();
     }
 
-    return Container(
-      padding: const EdgeInsets.all(16),
-      decoration: const BoxDecoration(
-        color: AppColors.white,
-        borderRadius: BorderRadius.all(Radius.circular(12)),
-      ),
+    return BlockContainer(
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Text('Об отеле', style: textTheme.headlineLarge),
           const SizedBox(height: 16),
-          const _PeculiarityList(),
+          PeculiarityWrap(peculiarities: hotel.peculiarities),
           const SizedBox(height: 12),
           Text(
-            aboutTheHotel.description,
+            hotel.description,
             style: textTheme.bodyLarge?.copyWith(
               color: AppColors.black.withOpacity(0.9),
             ),
           ),
-          const _AdditionalInfoList(),
           const SizedBox(height: 16),
+          const _AdditionalInfoList(),
         ],
-      ),
-    );
-  }
-}
-
-class _PeculiarityList extends StatelessWidget {
-  const _PeculiarityList({super.key});
-
-  @override
-  Widget build(BuildContext context) {
-    final bloc = context.watch<HotelCubit>();
-    final peculiarities = bloc.state.hotel?.about_the_hotel.peculiarities;
-    return Wrap(
-      spacing: 8,
-      runSpacing: 8,
-      children: peculiarities
-              ?.map(
-                (p) => _Peculiarity(
-                  text: p,
-                ),
-              )
-              .toList() ??
-          [],
-    );
-  }
-}
-
-class _Peculiarity extends StatelessWidget {
-  final String text;
-
-  const _Peculiarity({super.key, required this.text});
-
-  @override
-  Widget build(BuildContext context) {
-    final textTheme = Theme.of(context).textTheme;
-    return Container(
-      padding: const EdgeInsets.symmetric(vertical: 5, horizontal: 10),
-      decoration: const BoxDecoration(
-        color: AppColors.lightestGrey,
-        borderRadius: BorderRadius.all(Radius.circular(5)),
-      ),
-      child: Text(
-        text,
-        style: textTheme.labelMedium?.copyWith(color: AppColors.grey),
       ),
     );
   }
@@ -93,24 +46,24 @@ class _AdditionalInfoList extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final additionalInformationList = [
-      const _AdditionalInformationButton(
+      const _AdditionalInfoButton(
         title: 'Удобства',
-        imageFileName: 'smile.png',
+        svgFileName: 'ic_smile.svg',
       ),
-      const _AdditionalInformationButton(
+      const _AdditionalInfoButton(
         title: 'Удобства',
-        imageFileName: 'check_mark.png',
+        svgFileName: 'ic_check_mark.svg',
       ),
-      const _AdditionalInformationButton(
+      const _AdditionalInfoButton(
         title: 'Что не включено',
-        imageFileName: 'cross.png',
+        svgFileName: 'ic_cross.svg',
       ),
     ];
 
     return Container(
       decoration: const BoxDecoration(
         borderRadius: BorderRadius.all(Radius.circular(15)),
-        color: AppColors.lightestGrey,
+        color: AppColors.lightestGrey2,
       ),
       child: ListView.separated(
         padding: const EdgeInsets.all(15),
@@ -131,14 +84,14 @@ class _AdditionalInfoList extends StatelessWidget {
   }
 }
 
-class _AdditionalInformationButton extends StatelessWidget {
+class _AdditionalInfoButton extends StatelessWidget {
   final String title;
-  final String imageFileName;
+  final String svgFileName;
 
-  const _AdditionalInformationButton({
+  const _AdditionalInfoButton({
     super.key,
     required this.title,
-    required this.imageFileName,
+    required this.svgFileName,
   });
 
   @override
@@ -148,10 +101,9 @@ class _AdditionalInformationButton extends StatelessWidget {
       onTap: () {},
       child: Row(
         children: [
-          Image.asset(
-            'assets/images/$imageFileName',
+          SvgPicture.asset(
+            'assets/icons/$svgFileName',
             height: 24,
-            width: 24,
           ),
           const SizedBox(width: 12),
           Column(
@@ -159,22 +111,22 @@ class _AdditionalInformationButton extends StatelessWidget {
             children: [
               Text(
                 title,
-                style: textTheme.labelMedium
+                style: textTheme.displayMedium
                     ?.copyWith(color: AppColors.darkerGrey),
               ),
               const SizedBox(height: 2),
               Text(
                 'Самое необходимое',
-                style: textTheme.labelSmall?.copyWith(color: AppColors.grey),
+                style: textTheme.displaySmall?.copyWith(color: AppColors.grey),
               ),
             ],
           ),
           const Spacer(),
-          const Icon(
-            Icons.arrow_forward_ios,
-            size: 24,
-            color: AppColors.darkerGrey,
+          SvgPicture.asset(
+            'assets/icons/ic_arrow_forward.svg',
+            height: 12,
           ),
+          const SizedBox(width: 6),
         ],
       ),
     );

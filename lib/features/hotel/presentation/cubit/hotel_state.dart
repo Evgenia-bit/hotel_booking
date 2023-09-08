@@ -1,15 +1,14 @@
 part of 'hotel_cubit.dart';
 
-
 class HotelState {
-  HotelModel? hotel;
+  Hotel? hotel;
   bool loading;
   bool failed;
 
   HotelState({this.hotel, this.loading = true, this.failed = false});
 
   HotelState copyWith({
-    HotelModel? hotel,
+    Hotel? hotel,
     bool loading = false,
     bool failed = false,
   }) {
@@ -20,4 +19,3 @@ class HotelState {
     );
   }
 }
-
